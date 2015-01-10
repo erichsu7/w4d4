@@ -1,0 +1,60 @@
+<% action_url = @album.persisted? ? album_url(@album) : albums_url%>
+<% action_method = @album.persisted? ? :patch : :post %>
+<% button_text = @album.persisted? ? "Confirm changes" : "Confirm album" %>
+
+<form action="<%= action_url %>" method="POST">
+  <%= include_form_auth_token %>
+  <input
+    type="hidden"
+    name="_method"
+    value="<%= action_method %>">
+
+  <p>
+    <input
+      type="text"
+      name="album[name]"
+      id="album_name"
+      value="<%= @album.name %>">
+    <label for="album_name">Album name</label>
+  </p>
+
+  <input
+    type="hidden"
+    name="album[band_id]"
+    value="<%= @band.id %>">
+
+  <p>
+  <select name="album[genre]" id="album_genre">
+    <% Album::GENRE_OPTIONS.each do |genre_option| %>
+      <option
+        value="<%= genre_option %>"
+        <%= "selected" if @album.genre == genre_option %>><%= genre_option.capitalize %></option>
+    <% end %>
+  </select>
+  <label for="album_genre">Genre</label>
+  </p>
+
+  <p>
+    <input
+      type="text"
+      name="album[year]"
+      id="album_year"
+      value="<%= @album.year %>">
+    <label for="album_year">Year</label>
+  </p>
+
+  <p>
+    <% Album::ALBUM_TYPE_OPTIONS.each do |album_type_option| %>
+      <input
+        type="radio"
+        name="album[album_type]"
+        id="album_album_type"
+        value="<%= album_type_option %>"
+        <%= "checked" if @album.album_type == album_type_option %>>
+      <label for="album_album_type"><%= album_type_option.capitalize %></label>
+    <% end %>
+  </p>
+
+  <input type="submit" value="<%= button_text %>">
+
+</form>

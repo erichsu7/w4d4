@@ -1,0 +1,12 @@
+<h2>Add note</h2>
+<form action="<%= track_notes_url(@track) %>" method="POST">
+  <%= include_form_auth_token %>
+  <input
+    type="hidden"
+    name="note[track_id]"
+    value="<%= @track.id %>">
+
+  <textarea name="note[body]" id="note_body"></textarea>
+
+  <input type="submit" value="Create note">
+</form>

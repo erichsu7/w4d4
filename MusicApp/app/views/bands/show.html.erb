@@ -1,0 +1,25 @@
+<h1><%= @band.name %></h1>
+
+<%= button_to "Add album", new_band_album_url(@band), method: :get %>
+<% unless @albums.empty? %>
+  <table>
+    <tr>
+      <th>Album name</th>
+      <th>Genre</th>
+      <th>Year</th>
+      <th>Album type</th>
+    </tr>
+    <% @albums.each do |album| %>
+      <tr>
+        <td><%= link_to "#{album.name}", album_url(album) %></td>
+        <td><%= album.genre.capitalize %></td>
+        <td><%= album.year %></td>
+        <td><%= album.album_type %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<%= button_to "Edit band", edit_band_url(@band), method: :get %>
+<%= button_to "Delete band", band_url(@band), method: :delete %>
+<%= button_to "Back to all bands", bands_url, method: :get %>

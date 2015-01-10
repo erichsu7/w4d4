@@ -1,0 +1,23 @@
+<form action="<%= session_url %>" method="POST">
+  <%= include_form_auth_token %>
+  <h1>Log in</h1>
+
+  <p>
+    <input
+    type="text"
+    name="user[email]"
+    id="user_email">
+    <label for="user_email">Email</label>
+  </p>
+
+  <p>
+    <input
+    type="password"
+    name="user[password]"
+    id="user_password">
+    <label for="user_password">Password</label>
+  </p>
+
+  <input type="submit" value="Log in">
+
+</form>
